@@ -1,0 +1,8 @@
+.row_input{
+    margin-top: 5%;
+}
+
+.form-check-input:checked {
+    background-color: #4dbd3a;
+    border-color: #4dbd3a;
+}

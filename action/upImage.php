@@ -4,7 +4,7 @@
 $countfiles = count($_FILES['files']['name']);
 
 // Upload directory
-$upload_location = "uploads/";
+$upload_location = "../uploads/";
 
 // To store uploaded files path
 $files_arr = array();
@@ -28,10 +28,9 @@ for($index = 0;$index < $countfiles;$index++){
 
         	// File path
         	$path = $upload_location.$filename;
-
             // Upload file
     		if(move_uploaded_file($_FILES['files']['tmp_name'][$index],$path)){
-    			$files_arr[] = $path;
+    			$files_arr[] = $filename;
     		}
         }
     }
