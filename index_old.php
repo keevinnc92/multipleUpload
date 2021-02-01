@@ -37,6 +37,7 @@
             }
 
             // AJAX request
+<<<<<<< HEAD
             $.ajax({
                 url: 'ajaxfile.php',
                	type: 'post',
@@ -55,6 +56,35 @@
                    	
                 }
             });
+=======
+            $.post('ajaxfile.php', {data: form_data}, function(response, textStatus) {
+            	// if (response==1) {
+            		alert(1)
+            	// }
+            });
+
+            
+     //        $.ajax({
+     //            url: 'ajaxfile.php',
+     //           	type: 'post',
+     //           	data: form_data,
+     //           	dataType: 'json',
+     //            contentType: false,
+     //            processData: false,
+     //            success: function (response) {
+                   	
+     //               	for(var index = 0; index < response.length; index++) {
+					//     var src = response[index];
+
+					//     // Add img element in <div id='preview'>
+					//     $('#preview').append('<img src="'+src+'" width="200px;" height="200px">');
+					// }
+                   	
+     //            }
+     //        });
+
+
+>>>>>>> d61b4b6a236115ccd03ba53ad53bffcd4ea3f470
 		});
 	});
 	</script>

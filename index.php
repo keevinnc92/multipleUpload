@@ -9,7 +9,6 @@
     <title>Carmizon upload artworks</title>
 
     <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/"> -->
-
     <!-- Bootstrap core CSS -->
 
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -25,13 +24,13 @@
 
 
     <!-- Favicons -->
-<!-- <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-<link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-<link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
-<link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
-<link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
-<meta name="theme-color" content="#7952b3"> -->
+	<!-- <link rel="apple-touch-icon" href="/docs/5.0/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+	<link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+	<link rel="icon" href="/docs/5.0/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+	<link rel="manifest" href="/docs/5.0/assets/img/favicons/manifest.json">
+	<link rel="mask-icon" href="/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+	<link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
+	<meta name="theme-color" content="#7952b3"> -->
 
 
     <style>
@@ -151,7 +150,6 @@
 	          </div>
 	        </div>
 	        <!-- fin Artworks -->
-
 	      </div>
 	    </div>
 	  </div>
@@ -203,87 +201,81 @@
             });
 		});
 
+		function createCardArtwork(lastId){
+			  // Selecting last id 
+			  // var lastname_id = $('.content-form input[type=text]').last().attr('id');
+			  var lastname_id = lastId;
+			  // var split_id = lastname_id.split('_');
+			  // New index
+			  var index_id = Number(split_id[1]) + 1;
 
-	function createCardArtwork(lastId){
-		  // Selecting last id 
-		  // var lastname_id = $('.content-form input[type=text]').last().attr('id');
-		  var lastname_id = lastId;
-		  // var split_id = lastname_id.split('_');
-		  // New index
-		  var index_id = Number(split_id[1]) + 1;
+			  // Create clone
+			  var newel = $('.content-form:last').clone(true);
 
-		  // Create clone
-		  var newel = $('.content-form:last').clone(true);
+			  // Set id of new element
+			  $(newel).find('input[type=text]').attr("id","title_"+index_id);
 
-		  // Set id of new element
-		  $(newel).find('input[type=text]').attr("id","title_"+index_id);
+			  
+			  $labelAvailable = $(newel).find(".toggle-checkbox");
+			  var forLabelAvailable = $labelAvailable.attr('for');
+			  var splitForLabelAvailable = forLabelAvailable.split('_');
+			  $labelAvailable.attr('for',splitForLabelAvailable[0]+"_"+index_id);
 
-		  
-		  $labelAvailable = $(newel).find(".toggle-checkbox");
-		  var forLabelAvailable = $labelAvailable.attr('for');
-		  var splitForLabelAvailable = forLabelAvailable.split('_');
-		  $labelAvailable.attr('for',splitForLabelAvailable[0]+"_"+index_id);
-
-		  $allInputs = $(newel).find(":input");
-		  $allInputs.each(function (index)
-		         {
-		             var id_actual = $(this).attr('id');
-		             if (typeof id_actual != "undefined"){
-		              var split_name_id = id_actual.split('_');
-		              console.log(split_name_id[0]);
-		              if (split_name_id[0]!='currency' && split_name_id[0]!='status') {
-		                $(this).attr("id", split_name_id[0]+"_"+index_id);
-		                if(split_name_id[0]=='artwork-available'){
-		                  $(this).val(index_id);
-		                }else{
-		                  $(this).val('');
-		                }
-		              }
-		             }
-		         });
-
-
-		  //clear inputs
-		  // $(newel).find('input[type=text]').val('');
-		  $(newel).find('input[type=file]').val(null);
-		  $(newel).find('.custom-file-label').html('Select new image');
-		  $(newel).find('.custom-file-label').css("border", '1px solid rgb(195, 195, 195)');
-		  $(newel).find('input[type=checkbox]').removeAttr('checked');
-		  // $(newel).find('textarea').val('');
+			  $allInputs = $(newel).find(":input");
+			  $allInputs.each(function (index)
+			         {
+			             var id_actual = $(this).attr('id');
+			             if (typeof id_actual != "undefined"){
+			              var split_name_id = id_actual.split('_');
+			              console.log(split_name_id[0]);
+			              if (split_name_id[0]!='currency' && split_name_id[0]!='status') {
+			                $(this).attr("id", split_name_id[0]+"_"+index_id);
+			                if(split_name_id[0]=='artwork-available'){
+			                  $(this).val(index_id);
+			                }else{
+			                  $(this).val('');
+			                }
+			              }
+			             }
+			         });
 
 
-		  // Insert element
-		  if (index_id<=2) { //no duplicate element close
-		    $(newel).prepend("<a href='javascript:void(0);' class='close-element'>X</a>"); 
-		  }
+			  //clear inputs
+			  // $(newel).find('input[type=text]').val('');
+			  $(newel).find('input[type=file]').val(null);
+			  $(newel).find('.custom-file-label').html('Select new image');
+			  $(newel).find('.custom-file-label').css("border", '1px solid rgb(195, 195, 195)');
+			  $(newel).find('input[type=checkbox]').removeAttr('checked');
+			  // $(newel).find('textarea').val('');
 
-		  $(newel).insertAfter(".content-form:last");
-	}
 
+			  // Insert element
+			  if (index_id<=2) { //no duplicate element close
+			    $(newel).prepend("<a href='javascript:void(0);' class='close-element'>X</a>"); 
+			  }
 
-
-	//print selected artwork 
-	function printArtwork(response){
-		for(var index = 0; index < response.length; index++) {
-		    var src = "uploads/"+response[index];
-		    console.log(src);
-		    var cardHtml = '<div class="col" id="card_'+index+'"><div class="card shadow-sm"><p class="buttonClose"   id="'+index+'"><button type="button" class="btn-close" aria-label="Close"></button></p><img src="'+src+'" alt="" class="img"></text></svg><div class="card-body"><p class="card-text"><div class="col-sm-12 row_input"><input type="text" class="form-control" id="n_serie" placeholder="Serial number" value="" required=""></div><div class="col-sm-12 row_input"><input type="text" class="form-control" id="title" placeholder="Title" value="" required=""></div><div class="col-sm-12 row_input"><input type="text" class="form-control" id="XXX" placeholder="XXX" value="" required=""></div><div class="col-sm-12 row_input"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="available" checked><label class="form-check-label" for="flexSwitchCheckChecked">Available</label></div></div><div class="col-sm-12 row_input"><textarea id="description" name="description" rows="5" cols="20" placeholder="Description" class=" form-control"></textarea></div></p><div class="d-flex justify-content-between align-items-center"><div class="btn-group"><button type="button" class="btn btn-sm btn-outline-primary">Save</button></div><small class="text-muted">...Editing</small></div></div></div></div>';
-
-		    // Add img element in <div id='preview'>
-		    // $('#preview').append('<img src="'+src+'" width="200px;" height="200px">');
-		    $('#selectImage').hide();
-		    $('#preview').append(cardHtml);
+			  $(newel).insertAfter(".content-form:last");
 		}
-	}
 
-	$(".buttonClose").click(function(event) {
-		console.log($(this).attr("id"));
+		//print selected artwork 
+		function printArtwork(response){
+			for(var index = 0; index < response.length; index++) {
+			    var src = "uploads/"+response[index];
+			    console.log(src);
+			    var cardHtml = '<div class="col" id="card_'+index+'"><div class="card shadow-sm"><p class="buttonClose"   id="'+index+'"><button type="button" class="btn-close" aria-label="Close"></button></p><img src="'+src+'" alt="" class="img"></text></svg><div class="card-body"><p class="card-text"><div class="col-sm-12 row_input"><input type="text" class="form-control" id="n_serie" placeholder="Serial number" value="" required=""></div><div class="col-sm-12 row_input"><input type="text" class="form-control" id="title" placeholder="Title" value="" required=""></div><div class="col-sm-12 row_input"><input type="text" class="form-control" id="XXX" placeholder="XXX" value="" required=""></div><div class="col-sm-12 row_input"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="available" checked><label class="form-check-label" for="flexSwitchCheckChecked">Available</label></div></div><div class="col-sm-12 row_input"><textarea id="description" name="description" rows="5" cols="20" placeholder="Description" class=" form-control"></textarea></div></p><div class="d-flex justify-content-between align-items-center"><div class="btn-group"><button type="button" class="btn btn-sm btn-outline-primary">Save</button></div><small class="text-muted">...Editing</small></div></div></div></div>';
+
+			    // Add img element in <div id='preview'>
+			    // $('#preview').append('<img src="'+src+'" width="200px;" height="200px">');
+			    $('#selectImage').hide();
+			    $('#preview').append(cardHtml);
+			}
+		}
+
+		$(".buttonClose").click(function(event) {
+			console.log($(this).attr("id"));
+		});
+
 	});
-
-
-
-	});
-
 
 	function closeCard(index){
 		$("#card_"+index).hide();
